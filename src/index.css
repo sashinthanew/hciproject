@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Athletic dark theme - inspired by premium sports apps */
+    --background: 222 47% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 222 47% 9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 222 47% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Deep navy primary */
+    --primary: 222 47% 14%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Vibrant orange accent - energy & sport */
+    --secondary: 24 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 222 30% 18%;
+    --muted-foreground: 220 15% 60%;
+
+    /* Electric orange for highlights */
+    --accent: 24 100% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 30% 18%;
+    --input: 222 30% 14%;
+    --ring: 24 100% 50%;
+
+    --radius: 1rem;
+
+    /* Custom sport palette */
+    --sport-orange: 24 100% 50%;
+    --sport-orange-glow: 24 100% 60%;
+    --sport-navy: 222 47% 11%;
+    --sport-navy-light: 222 35% 20%;
+    --sport-success: 142 76% 45%;
+    --sport-warning: 38 92% 50%;
+    --sport-info: 199 89% 48%;
+
+    /* Gradients */
+    --gradient-sport: linear-gradient(135deg, hsl(24, 100%, 50%) 0%, hsl(35, 100%, 55%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(222, 47%, 9%) 0%, hsl(222, 47%, 6%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(222, 47%, 12%) 0%, hsl(222, 47%, 8%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(24, 100%, 50%, 0.15) 0%, transparent 70%);
+
+    /* Shadows */
+    --shadow-sport: 0 10px 40px -10px hsl(24 100% 50% / 0.3);
+    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 60px -15px hsl(24 100% 50% / 0.4);
+
+    /* Mobile safe areas */
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --nav-height: 5rem;
+
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 24 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 35% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 24 100% 50%;
+  }
+
+  .dark {
+    /* Same as root - app is dark by default */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 16px; /* Base font size for scaling */
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--accent));
+    border-radius: 10px;
+  }
+
+  /* Touch optimizations */
+  button, a, input, textarea, select {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Responsive text scaling */
+  @media (max-width: 375px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    html {
+      font-size: 18px;
+    }
+  }
+}
+
+@layer utilities {
+  /* Text gradient utility */
+  .text-gradient-sport {
+    background: var(--gradient-sport);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Sport glow effect */
+  .glow-sport {
+    box-shadow: var(--shadow-sport);
+  }
+
+  .glow-sport-intense {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Card hover lift */
+  .card-lift {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card), var(--shadow-sport);
+  }
+
+  /* Glass effect */
+  .glass {
+    background: hsl(var(--card) / 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Safe area padding for mobile */
+  .pb-safe {
+    padding-bottom: calc(var(--nav-height) + var(--safe-area-bottom) + 1rem);
+  }
+
+  /* Sport badge */
+  .badge-sport {
+    background: var(--gradient-sport);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Pulse animation for AR button */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(24 100% 50% / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(24 100% 50% / 0.6);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Slide up animation */
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out forwards;
+  }
+
+  /* Stagger children animation delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+}
